@@ -28,19 +28,18 @@ def endOfCode(s):
 
 def commentCode(line):
 	"Comment a line of code that is not already commented out"
-	if ( line.strip()[0:1] == ";" and line.strip()[1:2] != ";" ):
+	if line.strip()[:1] == ";" and line.strip()[1:2] != ";":
 		# skip lines that are already commented out, but not comments (;;)
 		return line
 	else:
-		return "; " + line
+		return f"; {line}"
 
 def uncommentCode(line):
 	"Uncomment a line of code"
-	if ( line.strip()[0:2] == ";;" or line.strip()[0:1] != ";" ):
+	if line.strip()[:2] == ";;" or line.strip()[:1] != ";":
 		return line
-	else:
-		semiPos = line.find(";")
-		return line[0:semiPos] + line[semiPos + 1:]
+	semiPos = line.find(";")
+	return line[:semiPos] + line[semiPos + 1:]
 
 def processFile(inFileName, verbose = True, outFileName = None):
 	"Process a file line by line"
